@@ -2,7 +2,9 @@ import 'dotenv/config'
 
 import Hapi from '@hapi/hapi'
 import Boom from '@hapi/boom'
+import Inert from '@hapi/inert'
 import HapiPino from 'hapi-pino'
+import Path from 'path'
 
 import rateLimiterPlugin from '@/plugins/rateLimiterPlugin'
 import hapiAuthJWT from 'hapi-auth-jwt2'
@@ -29,6 +31,9 @@ const server: Hapi.Server = Hapi.server({
           throw err ?? new Error('Unknown error')
         }
       }
+    },
+    files: {
+      relativeTo: Path.join(__dirname, 'public')
     }
   }
 })
@@ -43,6 +48,8 @@ export async function createServer (): Promise<Hapi.Server> {
     }
   })
 
+  await server.register(Inert);
+
   await server.register([
     rateLimiterPlugin,
     hapiAuthJWT,
@@ -50,6 +57,17 @@ export async function createServer (): Promise<Hapi.Server> {
     adminPlugin
   ])
   await server.initialize()
+
+  server.route({
+    method: 'GET',
+    path: '/',
+    handler: function (request, h) {
+      return h.file('index.html')
+    },
+    options: {
+      auth: false
+    }
+  })
 
   return server
 }
