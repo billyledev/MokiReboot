@@ -1,0 +1,21 @@
+meta {
+  name: Update status
+  type: http
+  seq: 4
+}
+
+patch {
+  url: http://localhost:3000/status
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIn0.Xs1l2H7ui_yqE-GlQ2GARQ5ZpjuS8B8xQaooy89Q8y8
+}
+
+body:json {
+  {
+    "status": "reboot"
+  }
+}
