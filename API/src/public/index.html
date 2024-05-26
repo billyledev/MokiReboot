@@ -45,7 +45,8 @@
 
     <script>
       window.addEventListener('load', () => {
-        console.log('loaded');
+        const API_BASE = '/mokireboot/api';
+
         const loginForm = document.querySelector('#loginForm');
         const passwordField = document.querySelector('#passwordField');
         const loginButton = document.querySelector('#loginButton');
@@ -71,7 +72,7 @@
         loginButton.addEventListener('click', () => {
           const password = passwordField.value;
 
-          fetch('/login', {
+          fetch(`${API_BASE}/login`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
@@ -103,7 +104,7 @@
         });
 
         rebootButton.addEventListener('click', () => {
-          fetch('/status', {
+          fetch(`${API_BASE}/status`, {
             method: 'PATCH',
             headers: {
               'Content-Type': 'application/json',
