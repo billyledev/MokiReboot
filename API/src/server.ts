@@ -48,8 +48,6 @@ export async function createServer(): Promise<Hapi.Server> {
     },
   });
 
-  await server.register(Inert);
-
   await server.register([
     rateLimiterPlugin,
     hapiAuthJWT,
@@ -59,6 +57,8 @@ export async function createServer(): Promise<Hapi.Server> {
   await server.initialize();
 
   if (!isProduction) {
+    await server.register(Inert);
+
     server.route({
       method: 'GET',
       path: '/',
