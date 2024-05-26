@@ -58,14 +58,16 @@ export async function createServer(): Promise<Hapi.Server> {
   ]);
   await server.initialize();
 
-  server.route({
-    method: 'GET',
-    path: '/',
-    handler: (request, h) => h.file('index.html'),
-    options: {
-      auth: false,
-    },
-  });
+  if (!isProduction) {
+    server.route({
+      method: 'GET',
+      path: '/',
+      handler: (request, h) => h.file('index.html'),
+      options: {
+        auth: false,
+      },
+    });
+  }
 
   return server;
 }

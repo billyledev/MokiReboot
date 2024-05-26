@@ -1,5 +1,5 @@
 # MokiReboot API
 
-`yarn build`  
-`yarn pm2:start`  
-`yarn pm2:status`
+`npm build`  
+`npm run pm2:start`  
+`npm run pm2:status`

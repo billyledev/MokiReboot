@@ -1,23 +1,27 @@
 {
   "compilerOptions": {
-    "sourceMap": true,
-    "outDir": "dist",
-    "target": "ES2018",
-    "module": "commonjs",
-    "strict": true,
-    "lib": ["esnext"],
+    "lib": ["ESNext"],
+    "target": "ESNext",
+
+    "module": "CommonJS",
     "esModuleInterop": true,
+
+    "outDir": "dist",
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
       "*": ["node_modules/*"]
-    }
+    },
+
+    "strict": true,
+    "sourceMap": true,
   },
   "include": [
-    "./src/**/*.ts"
+    "src/**/*.ts"
   ],
-  "exclude": ["./dist"],
+  "exclude": ["dist"],
   "ts-node": {
-    "require": ["tsconfig-paths/register"]
+    "require": ["tsconfig-paths/register"],
+    "files": true
   }
 }
